@@ -1,6 +1,6 @@
 # green-society
 
-install dependencies
+enter venv and install dependencies
 ```shell
 pip install -r requirements.txt
 ```
