@@ -1,0 +1,161 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row mx-auto">
+        <!-- Heading// Change to User profile info later -->
+        <div class="col-md-6 text-center align-self-center mt-5" >
+            <h1 >
+                The Green Society
+            </h1>
+        </div>
+        <!-- Click to add items or request items -->
+        <div class="col-md-6 d-flex justify-content-center align-self-center mt-5">
+          <ul class="nav">
+            <li class="m-3">
+              <a href="{{ url_for('add_items') }}" class="link-secondary">
+                <i class="fas fa-plus-circle"></i>
+                Add Item
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Leader Board Green -->
+        <div class="col-md-6 d-flex justify-content-center align-self-center my-5">
+          <table class="table table-success">
+            <thead>
+              <tr>
+                <th scope="col">Green Points Leader Board</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>{{ current_user.username }}</td>
+                <td>{{ current_user.green_score }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <!-- Leader Board Heart -->
+        <div class="col-md-6 d-flex justify-content-center align-self-center my-5">
+          <table class="table table-danger">
+            <thead>
+              <tr>
+                <th scope="col">Heart Points Leader Board</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>{{ current_user.username }}</td>
+                <td>{{ current_user.heart_score }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Material tabs, select which materials to display -->
+        <div class="col-md-12 d-flex justify-content-center align-self-center my-5">
+          <ul class="nav nav-tabs">
+
+            {% if val==1 %}
+              <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('home', type='all') }}">All</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('home', type='all') }}">All</a>
+              </li>
+            {% endif %}
+
+            {% if val==2 %}
+              <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('home', type='metal') }}">Metal</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('home', type='metal') }}">Metal</a>
+              </li>
+            {% endif %}
+
+            {% if val==3 %}
+              <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('home', type='wood') }}">Wood</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('home', type='wood') }}">Wood</a>
+              </li>
+            {% endif %}
+
+            {% if val==4 %}
+              <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('home', type='plastic') }}">Plastic</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('home', type='plastic') }}">Plastic</a>
+              </li>
+            {% endif %}
+
+            {% if val==5 %}
+              <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('home', type='clothes') }}">Clothes</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('home', type='clothes') }}">Clothes</a>
+              </li>
+            {% endif %}
+
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('home', type='all') }}">All</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('home', type='metal') }}">Metal</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('home', type='plastic') }}">Wood</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('home', type='plastic') }}">Plastic</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('home', type='clothes') }}">Clothes</a>
+            </li>
+          </ul> -->
+        </div>
+    </div>
+</div>
+
+<div class="container m-5 mx-auto">
+    <div class="row">
+      {% for item in items %}
+
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            <a href="{{ url_for('product', product_id=item.id) }}"><img class="card-img-top" src="{{ image_file }}" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="{{ url_for('product', product_id=item.id) }}">{{ item.name }}</a>
+              </h4>
+              <h5>${{ item.weight * item.category.price_per_kg }}</h5>
+              <h5>{{ item.weight }}KG</h5>
+              <p class="card-text">{{item.description}}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+        
+    
+      </div>
+      <!-- /.row -->
+</div>
+
+
+
+{% endblock content %}
