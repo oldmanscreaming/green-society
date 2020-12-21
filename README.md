@@ -1,11 +1,11 @@
 # green-society
 
 install dependencies
-'''shell
+```shell
 pip install -r requirements.txt
 ```
 
-execute 
-'''shell
+execute program
+```shell
 python run.py
 ```
